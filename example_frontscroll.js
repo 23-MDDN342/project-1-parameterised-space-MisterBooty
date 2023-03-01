@@ -11,32 +11,71 @@ function draw_one_frame(cur_frac) {
   fill(0, 200, 0);
   rect(0, height/2, width, height/2);
 
-  //cube start
-  fill(100,30,0);
-  quad(50,50, 50,110 ,100,140, 100, 80); // left side
+  
+  //cube  top left start
 
-  fill(250,30,0);
-  quad(100,80, 100,140 ,150,110, 150,50); //right side
+  fill(200,200,100); //left
+  rect (100,100,50,100);
+ 
+fill(250,250,200); //right
+rect (150,100,50,100);
+ 
+fill(250,250,0);
+quad(100,100, 150,130 ,200,100, 150, 70); // top side
 
-  fill(50,10,0);
-  quad(50,50, 100,80 ,150,50, 100, 20); // top side
+//cube top left end
 
-  // cube end
+  //cube  top right start
 
-  //cube 2
+  fill(200,200,100); //left
+  rect (200,100,50,100);
+   
+  fill(250,250,200); //right
+  rect (250,100,50,100);
+   
+  fill(250,250,0);
+  quad(200,100, 250,130 ,300,100, 250, 70); // top side
+  
+ //cube top right end
 
-  fill(200,200,100);
-  rect (50,190,50,80);
+  //cube bottom left start
 
-  fill(250,250,200);
-  rect (100,190,50,80);
+  fill(200,200,100); //left
+  rect (50,200,50,70);
+
+  fill(250,250,200); //right
+  rect (100,200,50,70);
 
   fill(250,250,0);
-  quad(50,190, 100,220 ,150,190, 100, 160); // top side
+  quad(50,200, 100,230 ,150,200, 100, 170); // top side
 
+  //cube bottom left end
 
+    //cube bottom center start
 
+    fill(200,200,100); //left
+    rect (150,200,50,70);
+  
+    fill(250,250,200); //right
+    rect (200,200,50,70);
+  
+    fill(250,250,0);
+    quad(150,200, 200,230 ,250,200, 200, 170); // top side
 
+  //cube bottom center end
+
+  //cube bottom right start
+
+    fill(200,200,100); //left
+    rect (250,200,50,70);
+  
+    fill(250,250,200); //right
+    rect (300,200,50,70);
+  
+    fill(250,250,0);
+    quad(250,200, 300,230 ,350,200, 300, 170); // top side
+
+  //cube bottom right end
   stroke(0);
   line(width/2, height/2, width/2, height);
   line(0.40*width, height/2, 0.20*width, height);
@@ -50,10 +89,11 @@ function draw_one_frame(cur_frac) {
     0.75 * height,
     1.00 * height
   ]
-
+  fill(250,250,200);
   if (debugView) {
     strokeWeight(1);
     stroke(255, 0, 0);
+  
     for(let i=0; i<grid_points.length; i++) {
       line(0, grid_points[i], width, grid_points[i]);
     }
@@ -64,5 +104,6 @@ function draw_one_frame(cur_frac) {
   for(let i=0; i<grid_points.length-1; i++) {
     let cur_grid_line = map(cur_frac, 0, 1, grid_points[i], grid_points[i+1])
     line(0, cur_grid_line, width, cur_grid_line);
+    rect(150,100,50, cur_grid_line/4)
   }
 }
