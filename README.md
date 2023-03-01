@@ -2,12 +2,4 @@
 ### 2023 MDDN342 Project 1: Parameterised Space
 EXAMPLE README 
 
-My design is inspired by fireworks and flowers. I want it to be full of changes, so that every frame can have a fresh feeling.
-
-In terms of concrete performance, I draw different geometric figures, let them spread out, and overlay their number at the same time, through the time difference to make the whole dynamic background become enthusiastic.
-
-In terms of color, I made different shapes correspond to different colors, and changed the parameters so that they were different every time they appeared, so that there would be differences between different loops.
-
-In the initial design, I only added the circle. Through the color change of the circle and the superposition of the movement track, although it has a good effect, I think it is too monotonous.
-
-In the later stages, I added a lot of geometric shapes, which made the color and pattern more variable.
+02/03 Came up with a idea for my parameterisedSpace project. It consists of a wallpaper of cubes, which has waves flowing through it. These waves are represented by certain faces of a row of cubes extending and then retreating like a 3d bar graph. These waves will be skipping rows in order for them to bee seen more easily. once a wave has passed, there will be a point in which all cubes are netural sizez, before extending again. However, with each extension and retreat the cubes will then change what face they extend on, giving the wave a more 3d effect.
