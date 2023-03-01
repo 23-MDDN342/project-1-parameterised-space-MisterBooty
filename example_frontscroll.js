@@ -11,6 +11,32 @@ function draw_one_frame(cur_frac) {
   fill(0, 200, 0);
   rect(0, height/2, width, height/2);
 
+  //cube start
+  fill(100,30,0);
+  quad(50,50, 50,110 ,100,140, 100, 80); // left side
+
+  fill(250,30,0);
+  quad(100,80, 100,140 ,150,110, 150,50); //right side
+
+  fill(50,10,0);
+  quad(50,50, 100,80 ,150,50, 100, 20); // top side
+
+  // cube end
+
+  //cube 2
+
+  fill(200,200,100);
+  rect (50,190,50,80);
+
+  fill(250,250,200);
+  rect (100,190,50,80);
+
+  fill(250,250,0);
+  quad(50,190, 100,220 ,150,190, 100, 160); // top side
+
+
+
+
   stroke(0);
   line(width/2, height/2, width/2, height);
   line(0.40*width, height/2, 0.20*width, height);
