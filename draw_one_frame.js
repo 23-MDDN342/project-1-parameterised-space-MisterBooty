@@ -12,37 +12,40 @@ function draw_one_frame(cur_frac) {
 	let noiseyColor;
 	///////////////////////////////////////////
 
-	let rectSize = width / 12.01
+	let rectSize = width / 12
 	let SpaceSize = width /6
 	
 	///////////////////////////////////////////
 
-	fill(Leftcolor)
+	fill(Leftcolor) // yellow
 
 for( let across = 0; across < width / SpaceSize; across++){
 	for( let down = 0; down < height / SpaceSize; down++){
 
 		let noiseColor = getNoiseValue(SpaceSize*across,SpaceSize*down,0.8, "noiseColor",0,3)
-		rect(SpaceSize*across,SpaceSize*down-30, rectSize, rectSize)
-		rect(SpaceSize*across + 80,SpaceSize*down+40, rectSize, rectSize)
+		rect(SpaceSize*across,SpaceSize*down-25, rectSize, rectSize)
+		rect(SpaceSize*across + 80,SpaceSize*down+55, rectSize, rectSize)
+		
 		
 		
 
 	}
 }
 	
-fill(Rightcolor);
-for( let across= 0; across < width / SpaceSize; across++){
-	for( let down = -1.1; down < height / SpaceSize; down++){
+fill(TopColor); //blue
+for( let across= 0 ; across < width / SpaceSize+0.5; across++){
+	for( let down = -1; down < height / SpaceSize+3; down++){
 
+quad(SpaceSize*across-80,SpaceSize*down-65,SpaceSize*across-160,SpaceSize*down-25,SpaceSize*across-80,SpaceSize*down+15,SpaceSize*across,SpaceSize*down-25)
 		let noiseColor = getNoiseValue(SpaceSize*across,SpaceSize*down,0.8, "noiseColor",0,3)
-		rect(SpaceSize*across,SpaceSize*down-90, rectSize, rectSize)
-		rect(SpaceSize*across + 80,SpaceSize*down-10, rectSize, rectSize)
+		//rect(SpaceSize*across,SpaceSize*down-90, rectSize, rectSize)
+		//rect(SpaceSize*across + 80,SpaceSize*down-10, rectSize, rectSize+10)
 		
 		
 
 	}
 }
+
 
 //	let noiseColor;
 //	let noiseyColor; 
