@@ -14,34 +14,58 @@ function draw_one_frame(cur_frac) {
 
 	let rectSize = width / 12
 	let SpaceSize = width /6
+	let SpaceSize2 = width/6 +0.5
+	let spaaeSize3 = width / 6 + 3
+
+	let quadX1Size = width/6
+	let quadY1Size = width/12
+	let quadX2Size = width/12
+	let quadY2Size = width/8
+	let quadX3Size = width/12
+	let quadY3Size = width/24
+	let quadX4Size = width/768
+	let quadY4Size = width/12
+
+
+	let quadSpaceSize = width/10
+
 	
 	///////////////////////////////////////////
 
 	fill(Leftcolor) // yellow
-
+stroke(250)
 for( let across = 0; across < width / SpaceSize; across++){
 	for( let down = 0; down < height / SpaceSize; down++){
 
 		let noiseColor = getNoiseValue(SpaceSize*across,SpaceSize*down,0.8, "noiseColor",0,3)
-		rect(SpaceSize*across,SpaceSize*down-25, rectSize, rectSize)
-		rect(SpaceSize*across + 80,SpaceSize*down+55, rectSize, rectSize)
-		
-		
-		
+		//rect(SpaceSize*across,SpaceSize*down-25, rectSize, rectSize)
+		//rect(SpaceSize*across + 80,SpaceSize*down+55, rectSize, rectSize)
+		rect(SpaceSize*across,SpaceSize*down, rectSize, rectSize)
 
 	}
 }
 	
-fill(TopColor); //blue
-for( let across= 0 ; across < width / SpaceSize+0.5; across++){
-	for( let down = -1; down < height / SpaceSize+3; down++){
+fill(Leftcolor); //blue
+for( let across= 0.5 ; across < width / SpaceSize2; across++){
+	for( let down = 0.5; down < height / SpaceSize2; down++){
+let noiseColor = getNoiseValue(SpaceSize*across,SpaceSize*down,0.8, "noiseColor",0,3)
+		
+			rect(SpaceSize*across ,SpaceSize*down, rectSize, rectSize)
 
-quad(SpaceSize*across-80,SpaceSize*down-65,SpaceSize*across-160,SpaceSize*down-25,SpaceSize*across-80,SpaceSize*down+15,SpaceSize*across,SpaceSize*down-25)
-		let noiseColor = getNoiseValue(SpaceSize*across,SpaceSize*down,0.8, "noiseColor",0,3)
+	}
+}
+
+fill(Rightcolor); //blue
+for( let across= 0.5; across < width / SpaceSize2; across++){
+	for( let down = 0.5; down < height / SpaceSize2; down++){
+
+
+let noiseColor = getNoiseValue(SpaceSize*across,SpaceSize*down,0.8, "noiseColor",0,3)
 		//rect(SpaceSize*across,SpaceSize*down-90, rectSize, rectSize)
 		//rect(SpaceSize*across + 80,SpaceSize*down-10, rectSize, rectSize+10)
 		
-		
+//quad(SpaceSize*across-80,SpaceSize*down-65,SpaceSize*across-160,SpaceSize*down-25,SpaceSize*across-80,SpaceSize*down+15,SpaceSize*across,SpaceSize*down-25)
+quad(quadX2Size, quadY2Size,quadX1Size, quadY1Size,quadX3Size,quadY3Size, quadX4Size, quadY4Size)	
 
 	}
 }
