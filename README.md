@@ -7,3 +7,6 @@ EXAMPLE README
 07/03 messed around more with the expanding cube. After watching todays class, i believe that there are a lot of things that i can take into my away and implemnt into my own code. I believe that there are some new strategies that i could use to achieve my goal.
 
 tried to implement some of phoebes code and re edit it to see what i could create. After a lot of frudtrating math i have ended up with a checkerboard. have to see what happens next
+
+09/03
+In class i tied up my code and made it so that it would work in the normal, the large and the XL view. I need to figure out how to repeat my quads so that they fill the entire page correctly. I also managed to mak my bacground sqares longer.

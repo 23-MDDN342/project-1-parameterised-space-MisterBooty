@@ -7,15 +7,17 @@ function draw_one_frame(cur_frac) {
 	let TopColor = color("#2F4858");// dark blue
 	let Leftcolor = color("#F6AE2D"); // mustard yellow
 	let Rightcolor = color("#F26419"); // ORANGE ORANGE
-
-	
 	let noiseyColor;
+
+	let moveXMap;
+
 	///////////////////////////////////////////
 
 	let rectSize = width / 12
+	let rectSize2 = width / 8
 	let SpaceSize = width /6
 	let SpaceSize2 = width/6 +0.5
-	let spaaeSize3 = width / 6 + 3
+	let spaceSize3 = width / 4
 
 	let quadX1Size = width/6
 	let quadY1Size = width/12
@@ -29,46 +31,56 @@ function draw_one_frame(cur_frac) {
 
 	let quadSpaceSize = width/10
 
-	
 	///////////////////////////////////////////
 
-	fill(Leftcolor) // yellow
+fill(Leftcolor) // yellow Squares
 stroke(250)
-for( let across = 0; across < width / SpaceSize; across++){
-	for( let down = 0; down < height / SpaceSize; down++){
+	for( let across = 0; across < width / SpaceSize; across++){
+		for( let down = 0; down < height / SpaceSize; down++){
 
-		let noiseColor = getNoiseValue(SpaceSize*across,SpaceSize*down,0.8, "noiseColor",0,3)
+			let noiseColor = getNoiseValue(SpaceSize*across,SpaceSize*down,0.8, "noiseColor",0,3)
 		//rect(SpaceSize*across,SpaceSize*down-25, rectSize, rectSize)
 		//rect(SpaceSize*across + 80,SpaceSize*down+55, rectSize, rectSize)
-		rect(SpaceSize*across,SpaceSize*down, rectSize, rectSize)
+		rect(SpaceSize*across,spaceSize3*down, rectSize, rectSize2)
 
 	}
 }
 	
-fill(Leftcolor); //blue
+fill(Leftcolor); // yellow squares but checkboarded
 for( let across= 0.5 ; across < width / SpaceSize2; across++){
 	for( let down = 0.5; down < height / SpaceSize2; down++){
-let noiseColor = getNoiseValue(SpaceSize*across,SpaceSize*down,0.8, "noiseColor",0,3)
+		let noiseColor = getNoiseValue(SpaceSize*across,SpaceSize*down,0.8, "noiseColor",0,3)
 		
-			rect(SpaceSize*across ,SpaceSize*down, rectSize, rectSize)
-
+			rect(SpaceSize*across ,spaceSize3*down, rectSize, rectSize2)
+			
+			if(cur_frac > 0.3 && noiseColor < 0.3){
+								fill(225)
+								moveXMap = map(cur_frac,0.3, 0.5, spaceSize*across, spaceSize*(across+1))
+								rect(moveXMap,spaceSize*down,rectSize/2) 
+							}
+				
 	}
 }
 
-fill(Rightcolor); //blue
-for( let across= 0.5; across < width / SpaceSize2; across++){
-	for( let down = 0.5; down < height / SpaceSize2; down++){
+fill(Rightcolor); //quads, 
+	for( let across= 0.5; across < width / SpaceSize2; across++){
+		for( let down = 0.5; down < height / SpaceSize; down++){
+			let noiseColor = getNoiseValue(SpaceSize*across,SpaceSize*down,0.8, "noiseColor",0,3)
+			translate(0,-80);
+				quad(quadX2Size, quadY2Size,quadX1Size, quadY1Size,quadX3Size,quadY3Size, quadX4Size, quadY4Size)	
+				translate(0,80);
+				quad(quadX2Size, quadY2Size,quadX1Size, quadY1Size,quadX3Size,quadY3Size, quadX4Size, quadY4Size);
+				quad(quadX2Size, quadY2Size,quadX1Size, quadY1Size,quadX3Size,quadY3Size, quadX4Size, quadY4Size)	
+				translate(160,0);
+				quad(quadX2Size, quadY2Size,quadX1Size, quadY1Size,quadX3Size,quadY3Size, quadX4Size, quadY4Size);
+				quad(quadX2Size, quadY2Size,quadX1Size, quadY1Size,quadX3Size,quadY3Size, quadX4Size, quadY4Size)	
+				translate(0,0);
+				quad(quadX2Size, quadY2Size,quadX1Size, quadY1Size,quadX3Size,quadY3Size, quadX4Size, quadY4Size);
 
-
-let noiseColor = getNoiseValue(SpaceSize*across,SpaceSize*down,0.8, "noiseColor",0,3)
-		//rect(SpaceSize*across,SpaceSize*down-90, rectSize, rectSize)
-		//rect(SpaceSize*across + 80,SpaceSize*down-10, rectSize, rectSize+10)
-		
-//quad(SpaceSize*across-80,SpaceSize*down-65,SpaceSize*across-160,SpaceSize*down-25,SpaceSize*across-80,SpaceSize*down+15,SpaceSize*across,SpaceSize*down-25)
-quad(quadX2Size, quadY2Size,quadX1Size, quadY1Size,quadX3Size,quadY3Size, quadX4Size, quadY4Size)	
-
+				
 	}
 }
+
 
 
 //	let noiseColor;
