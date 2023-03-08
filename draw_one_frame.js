@@ -9,6 +9,8 @@ function draw_one_frame(cur_frac) {
 	let Rightcolor = color("#F26419"); // ORANGE ORANGE
 	let noiseyColor;
 
+	let moveMap = map(cur_frac, 0, 1, -30, 220)
+   let moveMapX,moveMapY;
 	let moveXMap;
 
 	///////////////////////////////////////////
@@ -27,10 +29,6 @@ function draw_one_frame(cur_frac) {
 	let quadY3Size = width/24
 	let quadX4Size = width/768
 	let quadY4Size = width/12
-
-
-	let quadSpaceSize = width/10
-
 	///////////////////////////////////////////
 
 fill(Leftcolor) // yellow Squares
@@ -53,11 +51,7 @@ for( let across= 0.5 ; across < width / SpaceSize2; across++){
 		
 			rect(SpaceSize*across ,spaceSize3*down, rectSize, rectSize2)
 			
-			if(cur_frac > 0.3 && noiseColor < 0.3){
-								fill(225)
-								moveXMap = map(cur_frac,0.3, 0.5, spaceSize*across, spaceSize*(across+1))
-								rect(moveXMap,spaceSize*down,rectSize/2) 
-							}
+			
 				
 	}
 }
@@ -66,22 +60,29 @@ fill(Rightcolor); //quads,
 	for( let across= 0.5; across < width / SpaceSize2; across++){
 		for( let down = 0.5; down < height / SpaceSize; down++){
 			let noiseColor = getNoiseValue(SpaceSize*across,SpaceSize*down,0.8, "noiseColor",0,3)
-			translate(0,-80);
+			translate(-80,-40);
+			//Draw_quad(SpaceSize*across,SpaceSize*down,0)
 				quad(quadX2Size, quadY2Size,quadX1Size, quadY1Size,quadX3Size,quadY3Size, quadX4Size, quadY4Size)	
-				translate(0,80);
+				translate(+80,120);
 				quad(quadX2Size, quadY2Size,quadX1Size, quadY1Size,quadX3Size,quadY3Size, quadX4Size, quadY4Size);
-				quad(quadX2Size, quadY2Size,quadX1Size, quadY1Size,quadX3Size,quadY3Size, quadX4Size, quadY4Size)	
 				translate(160,0);
 				quad(quadX2Size, quadY2Size,quadX1Size, quadY1Size,quadX3Size,quadY3Size, quadX4Size, quadY4Size);
-				quad(quadX2Size, quadY2Size,quadX1Size, quadY1Size,quadX3Size,quadY3Size, quadX4Size, quadY4Size)	
 				translate(0,0);
 				quad(quadX2Size, quadY2Size,quadX1Size, quadY1Size,quadX3Size,quadY3Size, quadX4Size, quadY4Size);
 
 				
 	}
 }
+}
+//function Draw_quad(x,y) {
+	//push()
 
+	//translate(x,y)
+	//quad(quadX2Size, quadY2Size,quadX1Size, quadY1Size,quadX3Size,quadY3Size, quadX4Size, quadY4Size);
 
+//	Pop();
+
+//}
 
 //	let noiseColor;
 //	let noiseyColor; 
@@ -101,7 +102,11 @@ fill(Rightcolor); //quads,
 //		noiseyLerp = lerpColor(TopColor, Leftcolor,Rightcolor)  // https://p5js.org/reference/#/p5/lerpColor
 //		fill(noiseyLerp)
 //		rect(spacingSize*across,spacingSize*down ,rectSize)
-	
+//	if(cur_frac > 0.3 && noiseColor < 0.3){
+							//	fill(225)
+							//	moveXMap = map(cur_frac,0.3, 0.5, spaceSize*across, spaceSize*(across+1))
+							//	rect(moveXMap,spaceSize*down,rectSize/2) 
+							//}
 //			if(cur_frac > 0.3 && noiseColor < 0.3){
 //				fill(225)
 //				moveXMap = map(cur_frac,0.3, 1, spacingSize*across, spacingSize*(across+1))
@@ -110,6 +115,6 @@ fill(Rightcolor); //quads,
 //		}
 //	}
 	
-	}
+	
 	
 	
