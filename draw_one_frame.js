@@ -31,6 +31,23 @@ function draw_one_frame(cur_frac) {
 	let quadY4Size = width/12
 	///////////////////////////////////////////
 
+	let Keyframes = [
+		-0.425 * width,
+		0.125 * width,
+		0.625 * width,
+		1.125 * width
+	]
+
+	let Keyframes2 = [
+		1.125 * width,
+		0.625 * width,
+		0.125 * width,
+		-0.425 * width
+
+	]
+	//for (let i = 0; i<keyframes.length; i++)
+		//shape(Keyframes[i],0,0,0)
+
 fill(Leftcolor) // yellow Squares
 stroke(250)
 	for( let across = 0; across < width / SpaceSize; across++){
