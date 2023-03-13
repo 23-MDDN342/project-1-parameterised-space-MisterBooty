@@ -53,47 +53,56 @@ function draw_one_frame(cur_frac) {
 
 fill(Leftcolor) // yellow Squares
 stroke(250)
+for(let i=0; i<5; i++) {
+    let upwards_extension = map(cur_frac, 2.5, 0.5, Keyframes[i], Keyframes[i+1])
 	for( let across = 0; across < width / SpaceSize; across++){
 		for( let down = 0; down < height / SpaceSize; down++){
 			let noiseColor = getNoiseValue(SpaceSize*across,SpaceSize*down,0.8, "noiseColor",0,3)
 		//rect(SpaceSize*across,SpaceSize*down-25, rectSize, rectSize)
 		//rect(SpaceSize*across + 80,SpaceSize*down+55, rectSize, rectSize)
-		rect(SpaceSize*across,spaceSize3*down, rectSize, rectSize2)
+		rect(SpaceSize*across,spaceSize3*down + upwards_extension, rectSize, rectSize2 )
 
 	}
+}
 }
 
 	
 fill(Leftcolor); // yellow squares but checkboarded. Basically the diagonal ones.
+for(let i=0; i<5; i++) {
+    let upwards_extension = map(cur_frac, 2.5, 0.5, Keyframes[i], Keyframes[i+1])
 for( let across= 0.5 ; across < width / SpaceSize2; across++){ // 0.5 for angle
 	for( let down = 0.5; down < height / SpaceSize2; down++){
 		let noiseColor = getNoiseValue(SpaceSize*across,SpaceSize*down,0.8, "noiseColor",0,3) // for later perhaps
 		
-			rect(SpaceSize*across ,spaceSize3*down, rectSize, rectSize2)
+			rect(SpaceSize*across ,spaceSize3*down + upwards_extension , rectSize, rectSize2 )
 			
 			
 				
 	}
 }
+}
 
 fill(Rightcolor); //quads, 
-for (let i = 1; i<Keyframes.length; i++){ // trying to use the OG map but doesn't work
+//for (let i = 1; i<Keyframes.length; i++){ // trying to use the OG map but doesn't work
+for(let i=0; i<5; i++) {
+    let upwards_extension = map(cur_frac, 2.5, 0.5, Keyframes[i], Keyframes[i+1])
 	for( let across= 0.5; across < width / SpaceSize2; across++){
 		for( let down = 0.5; down < height / SpaceSize; down++){
 			let noiseColor = getNoiseValue(SpaceSize*across,SpaceSize*down,0.8, "noiseColor",0,3)
 			translate(160, 80); // -80,-40
 			//Draw_quad(SpaceSize*across,SpaceSize*down,0) **** This was when i tried to use translate in multiple functions. An idea to come back too
-				quad(quadX2Size + across, quadY2Size + down,quadX1Size + across, quadY1Size + down,quadX3Size + across,quadY3Size + down, quadX4Size+ across, quadY4Size + down)	
+				quad(quadX2Size , quadY2Size + upwards_extension,quadX1Size, quadY1Size + upwards_extension,quadX3Size ,quadY3Size + upwards_extension, quadX4Size, quadY4Size + upwards_extension)	
 				//translate(0,0); //+80,120
-				quad(quadX2Size, quadY2Size,quadX1Size, quadY1Size,quadX3Size,quadY3Size, quadX4Size, quadY4Size);
+				//quad(quadX2Size, quadY2Size,quadX1Size, quadY1Size,quadX3Size,quadY3Size, quadX4Size, quadY4Size);
 				//translate(160,80); // 160,0
-				quad(quadX2Size, quadY2Size,quadX1Size, quadY1Size,quadX3Size,quadY3Size, quadX4Size, quadY4Size);
+				//quad(quadX2Size, quadY2Size,quadX1Size, quadY1Size,quadX3Size,quadY3Size, quadX4Size, quadY4Size);
 				//translate(0,0); // 0,0 
-				quad(quadX2Size, quadY2Size,quadX1Size, quadY1Size,quadX3Size,quadY3Size, quadX4Size, quadY4Size);
+				//quad(quadX2Size, quadY2Size,quadX1Size, quadY1Size,quadX3Size,quadY3Size, quadX4Size, quadY4Size);
 
 				
 	}
 }
+//}
 }
 }
 
