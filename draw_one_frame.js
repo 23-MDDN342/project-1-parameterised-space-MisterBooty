@@ -9,19 +9,19 @@ function draw_one_frame(cur_frac) {
 	let Rightcolor = color("#F26419"); // ORANGE ORANGE
 	let noiseyColor;
 
-	let moveMap = map(cur_frac, 0, 1, -30, 220)
-   let moveMapX,moveMapY;
+	let moveMap = map(cur_frac, 0, 1, -30, 220) // Use later?
+    let moveMapX,moveMapY;
 	let moveXMap;
 
 	///////////////////////////////////////////
 
-	let rectSize = width / 12
+	let rectSize = width / 12 // 
 	let rectSize2 = width / 8
 	let SpaceSize = width /6
-	let SpaceSize2 = width/6 +0.5
-	let spaceSize3 = width / 4
+	let SpaceSize2 = width/6 +0.5 // this is used for other loops in order to get the size just right, and so that it fits in the different formats of sizing.
+	let spaceSize3 = width / 4 // same here
 
-	let quadX1Size = width/6
+	let quadX1Size = width/6 // I have to create varibles for all the quad points otherwise the size doesnt work in the different formats
 	let quadY1Size = width/12
 	let quadX2Size = width/12
 	let quadY2Size = width/8
@@ -31,7 +31,7 @@ function draw_one_frame(cur_frac) {
 	let quadY4Size = width/12
 	///////////////////////////////////////////
 
-	let Keyframes = [
+	let Keyframes = [ // used for a for loop but doesn't seem to do anything
 		-0.425 * width,
 		0.125 * width,
 		0.625 * width,
@@ -45,14 +45,16 @@ function draw_one_frame(cur_frac) {
 		-0.425 * width
 
 	]
-	//for (let i = 0; i<keyframes.length; i++)
+
+	// OG map code? not sure \/\/\/\/
+
+	//for (let i = 0; i<Keyframes.length; i++)
 		//shape(Keyframes[i],0,0,0)
 
 fill(Leftcolor) // yellow Squares
 stroke(250)
 	for( let across = 0; across < width / SpaceSize; across++){
 		for( let down = 0; down < height / SpaceSize; down++){
-
 			let noiseColor = getNoiseValue(SpaceSize*across,SpaceSize*down,0.8, "noiseColor",0,3)
 		//rect(SpaceSize*across,SpaceSize*down-25, rectSize, rectSize)
 		//rect(SpaceSize*across + 80,SpaceSize*down+55, rectSize, rectSize)
@@ -60,11 +62,12 @@ stroke(250)
 
 	}
 }
+
 	
-fill(Leftcolor); // yellow squares but checkboarded
-for( let across= 0.5 ; across < width / SpaceSize2; across++){
+fill(Leftcolor); // yellow squares but checkboarded. Basically the diagonal ones.
+for( let across= 0.5 ; across < width / SpaceSize2; across++){ // 0.5 for angle
 	for( let down = 0.5; down < height / SpaceSize2; down++){
-		let noiseColor = getNoiseValue(SpaceSize*across,SpaceSize*down,0.8, "noiseColor",0,3)
+		let noiseColor = getNoiseValue(SpaceSize*across,SpaceSize*down,0.8, "noiseColor",0,3) // for later perhaps
 		
 			rect(SpaceSize*across ,spaceSize3*down, rectSize, rectSize2)
 			
@@ -74,23 +77,27 @@ for( let across= 0.5 ; across < width / SpaceSize2; across++){
 }
 
 fill(Rightcolor); //quads, 
+for (let i = 1; i<Keyframes.length; i++){ // trying to use the OG map but doesn't work
 	for( let across= 0.5; across < width / SpaceSize2; across++){
 		for( let down = 0.5; down < height / SpaceSize; down++){
 			let noiseColor = getNoiseValue(SpaceSize*across,SpaceSize*down,0.8, "noiseColor",0,3)
-			translate(-80,-40);
-			//Draw_quad(SpaceSize*across,SpaceSize*down,0)
-				quad(quadX2Size, quadY2Size,quadX1Size, quadY1Size,quadX3Size,quadY3Size, quadX4Size, quadY4Size)	
-				translate(+80,120);
+			translate(160, 80); // -80,-40
+			//Draw_quad(SpaceSize*across,SpaceSize*down,0) **** This was when i tried to use translate in multiple functions. An idea to come back too
+				quad(quadX2Size + across, quadY2Size + down,quadX1Size + across, quadY1Size + down,quadX3Size + across,quadY3Size + down, quadX4Size+ across, quadY4Size + down)	
+				//translate(0,0); //+80,120
 				quad(quadX2Size, quadY2Size,quadX1Size, quadY1Size,quadX3Size,quadY3Size, quadX4Size, quadY4Size);
-				translate(160,0);
+				//translate(160,80); // 160,0
 				quad(quadX2Size, quadY2Size,quadX1Size, quadY1Size,quadX3Size,quadY3Size, quadX4Size, quadY4Size);
-				translate(0,0);
+				//translate(0,0); // 0,0 
 				quad(quadX2Size, quadY2Size,quadX1Size, quadY1Size,quadX3Size,quadY3Size, quadX4Size, quadY4Size);
 
 				
 	}
 }
 }
+}
+
+///********************REFERENCE CODE - either old, examples, doesn't work or an idea to come back to*********************** */
 //function Draw_quad(x,y) {
 	//push()
 
