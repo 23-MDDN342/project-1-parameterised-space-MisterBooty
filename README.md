@@ -14,3 +14,7 @@ In class i tied up my code and made it so that it would work in the normal, the 
 14/03
 
 finally figured out how to repeat my wuads and implement a proper map into my shapes. The next step is to refine the limits of eahc maybe to get my design cleaned uop. Afgter this, i  wcan work on selectivley extended specific cubes and all that.
+
+21/03
+
+I think I'm nearing the end of completely my project. I've managed to achieve a decent looking wallpaper since last crib, but I'm not sure if I can complete what my original idea was. I think the code would be quite hard and complicated for as I'm not that experienced, and I don't think I would have enough time before hand in to make it work. I think my next steps will be to tidy up this version and make it look nicer, fix the smoothness, play around with the colour and try to sort out the scale on the different sized views
