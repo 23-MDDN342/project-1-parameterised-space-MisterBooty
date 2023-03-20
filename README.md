@@ -10,3 +10,7 @@ tried to implement some of phoebes code and re edit it to see what i could creat
 
 09/03
 In class i tied up my code and made it so that it would work in the normal, the large and the XL view. I need to figure out how to repeat my quads so that they fill the entire page correctly. I also managed to mak my bacground sqares longer.
+
+14/03
+
+finally figured out how to repeat my wuads and implement a proper map into my shapes. The next step is to refine the limits of eahc maybe to get my design cleaned uop. Afgter this, i  wcan work on selectivley extended specific cubes and all that.
