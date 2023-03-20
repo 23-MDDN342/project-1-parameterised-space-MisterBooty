@@ -4,17 +4,21 @@ function draw_one_frame(cur_frac) {
 	fill(backgroundColor)
 	rect(0,0, width, height)
 	////////////////////////////////////////////
-	let TopColor = color("#2F4858");// dark blue
+	let TopColor = color("#2F4858");// dark blue, unused
 	let Leftcolor = color("#F6AE2D"); // mustard yellow
-	let Rightcolor = color("#F26419"); // ORANGE ORANGE
+	let Rightcolor = color("#F26419"); // vibrant orange
+	let StrokeColour = 250 // white
+	let StrongStroke = width/190 // define so stroke keeps its weight in different canvas sizes
 	let noiseyColor;
 	let noiseyLerp;
 
+	//unused
 	let moveMap = map(cur_frac, 0, 1, -30, 220) // Use later?
     let moveMapX,moveMapY;
 	let moveXMap;
+	/// /\/\/\/\
 
-	///////////////////////////////////////////
+	/////////////////////////////////////////// this needs to be tidied
 
 	let rectMapValue1 = 2.5
 	let rectMapValue2 = 0.5525
@@ -37,11 +41,12 @@ function draw_one_frame(cur_frac) {
 	let quadX4Size = width/768
 	let quadY4Size = width/12
 
-	let quadOnSetX = 160
-	let quadOnSetY = 250
-	let quadOffsetX = -80
-	let quadOffsetY = 127
-	///////////////////////////////////////////
+	let quadOnSetX = width/6 // 160
+	let quadOnSetY = width/3.84 // 250
+	let quadOffsetX = width/-12 //-80
+	let quadOffsetY = width/7.56 //127
+
+	/////////////////////////////////////////// tidy up
 
 	let Keyframes = [ // used for a for loop but doesn't seem to do anything
 		-0.425 * width,
@@ -51,13 +56,14 @@ function draw_one_frame(cur_frac) {
 		1.125 * width // 1,125
 	]
 
+
+// unused
 	let Keyframes2 = [
 		//-0.325 * width, // 1.125
 		//0.125 * width, // 0.625
 		//1.25 * width, // new
 		//0.8 * width, // 01.25
 		//3.325 * width // -0.425
-
 		-0.25 * width,
     0.0 * width,
     0.25 * width,
@@ -65,86 +71,62 @@ function draw_one_frame(cur_frac) {
     0.75 * width,
     1.00 * width,
 	-0.25 * width
-
 	]
 let movingUpMap = map(cur_frac, 0,1,0.5, 2.5)
-	// OG map code? not sure \/\/\/\/
+// /\/\/\/\/\/\
+	
 
-// 	for (let i = 0; i<Keyframes.length; i++)
-// 		shape(Keyframes[i],0,0,0)
-
-fill(Leftcolor) // yellow Squares
-stroke(250)
-strokeWeight(5)
+fill(Leftcolor) // mustard yellow rectangles
+stroke(StrokeColour)
+strokeWeight(StrongStroke) // 5
 for(let i=0; i<5; i++) {
-    let upwards_extension = map(cur_frac, rectMapValue1, rectMapValue2, Keyframes[0], Keyframes[1]) //2.5, 0.5 Keyframes[i], Keyframes[i+1]
-	for( let across = 0 ; across < width / SpaceSize; across++){
-		for( let down = -0.75; down < height / SpaceSize; down++){
-			let noiseColor = getNoiseValue(SpaceSize*across,SpaceSize*down,0.8, "noiseColor",0,3)
-		//rect(SpaceSize*across,SpaceSize*down-25, rectSize, rectSize)
-		//rect(SpaceSize*across + 80,SpaceSize*down+55, rectSize, rectSize)
-		rect(SpaceSize*across,spaceSize3*down + upwards_extension , rectSize, rectSize2 )
-
+    let upwards_extension = map(cur_frac, rectMapValue1, rectMapValue2, Keyframes[0], Keyframes[1]) // Rectangle Moving upwards map
+		for( let across = 0 ; across < width / SpaceSize; across++){
+			for( let down = -0.75; down < height / SpaceSize; down++){ // -0.75 for the other rectangles t fit diagnolly.
+				let noiseColor = getNoiseValue(SpaceSize*across,SpaceSize*down,0.8, "noiseColor",0,3) // are you using this or not
+			
+					rect(SpaceSize*across,spaceSize3*down + upwards_extension , rectSize, rectSize2 )
 	}
 }
 }
 
 	
-fill(Leftcolor); // yellow squares but checkboarded. Basically the diagonal ones.
+fill(Leftcolor); // mustard yellow rectangles but placed on a diangnol offeset to appear as a checkerboard
 for(let i=0; i<5; i++) {
-    let upwards_extension = map(cur_frac, rectMapValue1, rectMapValue2, Keyframes[0], Keyframes[1]) // 2.5, 0.5, Keyframes[i], Keyframes[i+1]
-for( let across= -0.5 ; across < width / SpaceSize2; across++){ // 0.5 for angle
-	for( let down = -1.25; down < height / SpaceSize2; down++){
-		let noiseColor = getNoiseValue(SpaceSize*across,SpaceSize*down,0.8, "noiseColor",0,3) // for later perhaps
-		
-			rect(SpaceSize*across ,spaceSize3*down+ upwards_extension, rectSize, rectSize2)
-			
-			
+    let upwards_extension = map(cur_frac, rectMapValue1, rectMapValue2, Keyframes[0], Keyframes[1]) // 2.5, 0.5, Keyframes[i], Keyframes[i+1] // Rectangle Moving upwards map
+		for( let across= -0.5 ; across < width / SpaceSize2; across++){ // 0.5 for offset
+			for( let down = -1.25; down < height / SpaceSize2; down++){ // -1.25 for offset
+				let noiseColor = getNoiseValue(SpaceSize*across,SpaceSize*down,0.8, "noiseColor",0,3) // for later perhaps
 				
+					rect(SpaceSize*across ,spaceSize3*down+ upwards_extension, rectSize, rectSize2)
+			
 	}
 }
 }
 
 
-
-
-fill(Rightcolor); //quads, 
-//for (let i = 1; i<Keyframes.length; i++){ // trying to use the OG map but doesn't work
+fill(Rightcolor); // vibrant orange quads.
+//for (let i = 1; i<Keyframes.length; i++){ // trying to use the OG map but doesn't work // GET RID OF
 for(let i=0; i<5; i++) {
-
-    let upwards_extension = map(cur_frac,quadMapValue1,quadMapValue2, Keyframes[0], Keyframes[1]) // map(cur_frac, 2.5, 0.5, Keyframes[0], Keyframes[1])
-
-	for( let across= 0; across < width / SpaceSize2; across++){
-		for( let down = -1.5; down < height / SpaceSize; down++){
-			let noiseColor = getNoiseValue(SpaceSize*across,SpaceSize*down,0.8, "noiseColor",0,3)
-
-			// push()
-			// translate(75,-350)
-			push();
-			//translate(-80, -40); // -80,-40
-			translate(across * quadOnSetX, down * quadOnSetY)
-			//Draw_quad(SpaceSize*across,SpaceSize*down,0) **** This was when i tried to use translate in multiple functions. An idea to come back too
-				quad(quadX2Size , quadY2Size + upwards_extension,quadX1Size, quadY1Size + upwards_extension,quadX3Size ,quadY3Size + upwards_extension, quadX4Size, quadY4Size + upwards_extension)	
-				pop();
-				//translate(0,0); //+80,120
-				//quad(quadX2Size, quadY2Size,quadX1Size, quadY1Size,quadX3Size,quadY3Size, quadX4Size, quadY4Size);
-				//translate(160,80); // 160,0
-				//quad(quadX2Size, quadY2Size,quadX1Size, quadY1Size,quadX3Size,quadY3Size, quadX4Size, quadY4Size);
-				//translate(0,0); // 0,0 
-				//quad(quadX2Size, quadY2Size,quadX1Size, quadY1Size,quadX3Size,quadY3Size, quadX4Size, quadY4Size);
-				push()
-				translate(quadOffsetX,quadOffsetY) // -75, 120
-				push()
-				translate(across * quadOnSetX, down * quadOnSetY); // -80,-40
+    let upwards_extension = map(cur_frac,quadMapValue1,quadMapValue2, Keyframes[0], Keyframes[1]) // map(cur_frac, 2.5, 0.5, Keyframes[0], Keyframes[1]) // moves the quads upwards. Has to be applied on each Y value
+		for( let across= 0; across < width / SpaceSize2; across++){
+			for( let down = -1.5; down < height / SpaceSize; down++){
+				let noiseColor = getNoiseValue(SpaceSize*across,SpaceSize*down,0.8, "noiseColor",0,3) // decide to use it or not
+				push();
+				translate(across * quadOnSetX, down * quadOnSetY) // repeats the first seet of quads across and down
 					quad(quadX2Size , quadY2Size + upwards_extension,quadX1Size, quadY1Size + upwards_extension,quadX3Size ,quadY3Size + upwards_extension, quadX4Size, quadY4Size + upwards_extension)	
-					pop();
-					pop();
-					// pop();
-				
-				
+					pop(); // push and pop so that i can sue translate twice whikst not affecting the other.
+					
+					push()
+					translate(quadOffsetX,quadOffsetY) // another translate to offset more quads so that are slighlty diagnol and line up with the rectangular chekcerboard.
+					push()
+					translate(across * quadOnSetX, down * quadOnSetY); // repeats the second set of quads across and down
+						quad(quadX2Size , quadY2Size + upwards_extension,quadX1Size, quadY1Size + upwards_extension,quadX3Size ,quadY3Size + upwards_extension, quadX4Size, quadY4Size + upwards_extension)	
+						pop();
+						pop();
+					
 	}
 }
-//}
 }
 }
 
