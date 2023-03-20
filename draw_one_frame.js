@@ -8,6 +8,7 @@ function draw_one_frame(cur_frac) {
 	let Leftcolor = color("#F6AE2D"); // mustard yellow
 	let Rightcolor = color("#F26419"); // ORANGE ORANGE
 	let noiseyColor;
+	let noiseyLerp;
 
 	let moveMap = map(cur_frac, 0, 1, -30, 220) // Use later?
     let moveMapX,moveMapY;
@@ -15,11 +16,17 @@ function draw_one_frame(cur_frac) {
 
 	///////////////////////////////////////////
 
+	let rectMapValue1 = 2.5
+	let rectMapValue2 = 0.5525
+
 	let rectSize = width / 12 // 
 	let rectSize2 = width / 7.5 // 8 STUPID
 	let SpaceSize = width /6
 	let SpaceSize2 = width/12+0.5 // 6 + 0.4? this is used for other loops in order to get the size just right, and so that it fits in the different formats of sizing.
 	let spaceSize3 = width / 3.75 // 4 same here STUPID
+
+	let quadMapValue1 = 2.5
+	let quadMapValue2 = 0.499
 
 	let quadX1Size = width/6 // I have to create varibles for all the quad points otherwise the size doesnt work in the different formats
 	let quadY1Size = width/12
@@ -30,6 +37,8 @@ function draw_one_frame(cur_frac) {
 	let quadX4Size = width/768
 	let quadY4Size = width/12
 
+	let quadOnSetX = 160
+	let quadOnSetY = 250
 	let quadOffsetX = -80
 	let quadOffsetY = 127
 	///////////////////////////////////////////
@@ -68,8 +77,8 @@ fill(Leftcolor) // yellow Squares
 stroke(250)
 strokeWeight(5)
 for(let i=0; i<5; i++) {
-    let upwards_extension = map(cur_frac, 2.5, 0.5525, Keyframes[0], Keyframes[1]) //2.5, 0.5 Keyframes[i], Keyframes[i+1]
-	for( let across = 0; across < width / SpaceSize; across++){
+    let upwards_extension = map(cur_frac, rectMapValue1, rectMapValue2, Keyframes[0], Keyframes[1]) //2.5, 0.5 Keyframes[i], Keyframes[i+1]
+	for( let across = 0 ; across < width / SpaceSize; across++){
 		for( let down = -0.75; down < height / SpaceSize; down++){
 			let noiseColor = getNoiseValue(SpaceSize*across,SpaceSize*down,0.8, "noiseColor",0,3)
 		//rect(SpaceSize*across,SpaceSize*down-25, rectSize, rectSize)
@@ -83,7 +92,7 @@ for(let i=0; i<5; i++) {
 	
 fill(Leftcolor); // yellow squares but checkboarded. Basically the diagonal ones.
 for(let i=0; i<5; i++) {
-    let upwards_extension = map(cur_frac, 2.5, 0.5525, Keyframes[0], Keyframes[1]) // 2.5, 0.5, Keyframes[i], Keyframes[i+1]
+    let upwards_extension = map(cur_frac, rectMapValue1, rectMapValue2, Keyframes[0], Keyframes[1]) // 2.5, 0.5, Keyframes[i], Keyframes[i+1]
 for( let across= -0.5 ; across < width / SpaceSize2; across++){ // 0.5 for angle
 	for( let down = -1.25; down < height / SpaceSize2; down++){
 		let noiseColor = getNoiseValue(SpaceSize*across,SpaceSize*down,0.8, "noiseColor",0,3) // for later perhaps
@@ -96,11 +105,14 @@ for( let across= -0.5 ; across < width / SpaceSize2; across++){ // 0.5 for angle
 }
 }
 
+
+
+
 fill(Rightcolor); //quads, 
 //for (let i = 1; i<Keyframes.length; i++){ // trying to use the OG map but doesn't work
 for(let i=0; i<5; i++) {
 
-    let upwards_extension = map(cur_frac, 2.5, 0.5, Keyframes[0], Keyframes[1]) // map(cur_frac, 2.5, 0.5, Keyframes[0], Keyframes[1])
+    let upwards_extension = map(cur_frac,quadMapValue1,quadMapValue2, Keyframes[0], Keyframes[1]) // map(cur_frac, 2.5, 0.5, Keyframes[0], Keyframes[1])
 
 	for( let across= 0; across < width / SpaceSize2; across++){
 		for( let down = -1.5; down < height / SpaceSize; down++){
@@ -110,7 +122,7 @@ for(let i=0; i<5; i++) {
 			// translate(75,-350)
 			push();
 			//translate(-80, -40); // -80,-40
-			translate(across * 160, down * 250)
+			translate(across * quadOnSetX, down * quadOnSetY)
 			//Draw_quad(SpaceSize*across,SpaceSize*down,0) **** This was when i tried to use translate in multiple functions. An idea to come back too
 				quad(quadX2Size , quadY2Size + upwards_extension,quadX1Size, quadY1Size + upwards_extension,quadX3Size ,quadY3Size + upwards_extension, quadX4Size, quadY4Size + upwards_extension)	
 				pop();
@@ -123,7 +135,7 @@ for(let i=0; i<5; i++) {
 				push()
 				translate(quadOffsetX,quadOffsetY) // -75, 120
 				push()
-				translate(across * 160, down *250); // -80,-40
+				translate(across * quadOnSetX, down * quadOnSetY); // -80,-40
 					quad(quadX2Size , quadY2Size + upwards_extension,quadX1Size, quadY1Size + upwards_extension,quadX3Size ,quadY3Size + upwards_extension, quadX4Size, quadY4Size + upwards_extension)	
 					pop();
 					pop();
