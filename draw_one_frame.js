@@ -12,6 +12,9 @@ function draw_one_frame(cur_frac) {
 	let noiseyColor;
 	let noiseyLerp;
 
+	let fromOrange = color(242,100,25);
+	let toRed = color(76,6,29)
+
 	//unused
 	let moveMap = map(cur_frac, 0, 1, -30, 220) // Use later?
     let moveMapX,moveMapY;
@@ -73,6 +76,15 @@ function draw_one_frame(cur_frac) {
 	-0.25 * width
 	]
 let movingUpMap = map(cur_frac, 0,1,0.5, 2.5)
+
+let myMap; 
+if(cur_frac <= 0.5){
+myMap = map(cur_frac, 0, 0.5, 0, 225)
+}
+else{
+myMap = map(cur_frac, 0.5,1, 225,0)
+}
+
 // /\/\/\/\/\/\
 	
 
@@ -111,7 +123,9 @@ for(let i=0; i<5; i++) {
     let upwards_extension = map(cur_frac,quadMapValue1,quadMapValue2, Keyframes[0], Keyframes[1]) // map(cur_frac, 2.5, 0.5, Keyframes[0], Keyframes[1]) // moves the quads upwards. Has to be applied on each Y value
 		for( let across= 0; across < width / SpaceSize2; across++){
 			for( let down = -1.5; down < height / SpaceSize; down++){
-				let noiseColor = getNoiseValue(SpaceSize*across,SpaceSize*down,0.8, "noiseColor",0,3) // decide to use it or not
+				// let noiseColor = getNoiseValue(SpaceSize,spaceSize3,0.8, "noiseColor",0,3) // decide to use it or not
+				// 	noiseyLerp = lerpColor(toRed, fromOrange, myMap)  // https://p5js.org/reference/#/p5/lerpColor
+				// 	fill(noiseyLerp)
 				push();
 				translate(across * quadOnSetX, down * quadOnSetY) // repeats the first seet of quads across and down
 					quad(quadX2Size , quadY2Size + upwards_extension,quadX1Size, quadY1Size + upwards_extension,quadX3Size ,quadY3Size + upwards_extension, quadX4Size, quadY4Size + upwards_extension)	
