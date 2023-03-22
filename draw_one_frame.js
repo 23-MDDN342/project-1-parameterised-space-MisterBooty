@@ -1,50 +1,109 @@
-var x=300;
-var y=300;
-var a=100;
-var b=100;
+function draw_one_frame(cur_frac) {
+	noStroke()
+	let backgroundColor = color("#4C061D") // burnt red background
+	fill(backgroundColor)
+	rect(0,0, width, height)
 
-function draw_one_frame() {
-  //background(255);
-  x+=2;
-  y+=2;
-	a-=2;
-	b-=2;
-	strokeWeight(1);
-  translate(width/2, height/2);
-  for(var i=0;i<15;i++){
-	  for(var k=0;k<20;k++){
-		stroke(255,255,255);
-    rotate(PI / 12.0);
-	  fill(255,255-i*10,255-k*10);
-  	line(a%100,b%100,x%300,y%300);
-	  ellipse((x+i*20)%width,(y+k*20)%height,i+4,i+4);
-		drawtriangle((a-i*20)%width,(b-k*20)%height,k/8);
-		rect(x%width, y%height, k+10, k+10);
-		fill(0,i*10,255-k*10);
-		ellipse((x-i*20)%width,(y-k*20)%height,i+3,i+3);
-		rotate(PI / 24.0);
-		fill(255-(i+k)*5,(i+k)*7,i*20);
-		drawtriangle((a+i*20)%width,(b+k*20)%height,k/8);
-		rect(a%width, b%height, k+5, k+5);
-		drawflower(k,x);
-	  }
-  }
+	let Leftcolor = color("#F6AE2D"); // mustard yellow
+	let Rightcolor = color("#F26419"); // vibrant orange
+	let StrongStroke = width/180 //  defined so stroke keeps its weight in different canvas sizes
+	let fromWhite = color (255,255,255);
+	let toBlack = color (0,0,0)
 
+	/////////////////////////////////////////// 
+
+	let rectMapValue1 = 2.5 // if you take a closer look at the map, these will appear around the wrong way.
+	let rectMapValue2 = 0.5525 // the reeason why these values have to be put backwards is so that the shapes move up, not down.
+
+	let rectSize = width / 12 
+	let rectSize2 = width / 7.5 
+
+	let SpaceSize = width /6
+	let SpaceSize2 = width/12+0.5 
+	let spaceSize3 = width / 3.75 
+
+	let quadMapValue1 = 2.5
+	let quadMapValue2 = 0.499
+
+	let quadX1Size = width/6 // I have to create varibles for all the quad points otherwise the size doesnt work in the different formats
+	let quadY1Size = width/12
+	let quadX2Size = width/12
+	let quadY2Size = width/8
+	let quadX3Size = width/12
+	let quadY3Size = width/24
+	let quadX4Size = width/768
+	let quadY4Size = width/12
+
+	let quadOnSetX = width/6 
+	let quadOnSetY = width/3.84 
+
+	let quadOffsetX = width/-12
+	let quadOffsetY = width/7.56 
+
+	///////////////////////////////////////////
+
+	let Keyframes = [ // used for both rectangles and the quad loop, to make the shapes move upwards
+		-0.425 * width,
+		0.125 * width,
+		0.625 * width,
+		1.125 * width 
+	]
+
+///////////////////////////////////////////////////
+
+let ColourNoiseMap;  // Part of this map was taken from a demonstration from Phoebe Zeller in class at Victoria University of Wellington.
+
+if(cur_frac <= 0.5){
+ColourNoiseMap = map(cur_frac, 0, 0.5, 1.1, 0) // 1.1 bound means that the White strobe lingers for a bit longer then the black, as it was my orignal stroke colour.
+}
+else{
+ColourNoiseMap = map(cur_frac, 0.5,1, 0,1.1) // this map is then put into the lerp below, which is put into the stroke
 }
 
-function drawtriangle(x,y,r){
-	triangle(x, y, x+7*r, y-13.75*r, x+14*r, y);
+WhiteLerp = lerpColor(toBlack, fromWhite, ColourNoiseMap)  // stroke and outline that changes from black to white
+
+fill(Leftcolor) // mustard yellow rectangles
+stroke(WhiteLerp)
+strokeWeight(StrongStroke)
+for(let i=0; i<5; i++) {
+    let upwards_extension = map(cur_frac, rectMapValue1, rectMapValue2, Keyframes[0], Keyframes[1]) // Rectangle Moving upwards map
+		for( let across = 0 ; across < width / SpaceSize; across++){
+			for( let down = -0.75; down < height / SpaceSize; down++){ // -0.75 for the other rectangles t fit diagnolly.
+			
+					rect(SpaceSize*across,spaceSize3*down + upwards_extension , rectSize, rectSize2 )
+	}
+}
 }
 
-function drawflower(i,k){
-		if(i%2==1){
-			fill(255,(k*0.4)%255,30);
-			stroke(k%255,255,0);
-			arc(0,0,150+i+150*sin(k*PI/24),150,0,PI / 40);
-		}
-		else{
-			fill(k%255,0,255);
-			stroke(0,(k*0.4)%255,255);
-			arc(0,0,(100+100*cos(k*PI/24))%255,50,0,PI / 20);
-		}
+fill(Leftcolor); // mustard yellow rectangles but placed on a diagonal offeset to appear as a checkerboard
+for(let i=0; i<5; i++) {
+    let upwards_extension = map(cur_frac, rectMapValue1, rectMapValue2, Keyframes[0], Keyframes[1]) // Rectangle Moving upwards map
+		for( let across= -0.5 ; across < width / SpaceSize2; across++){ // 0.5 for offset
+			for( let down = -1.25; down < height / SpaceSize2; down++){ // -1.25 for offset
+	
+					rect(SpaceSize*across ,spaceSize3*down+ upwards_extension, rectSize, rectSize2)
+			
+	}
+}
+}
+
+fill(Rightcolor); // vibrant orange quads.
+for(let i=0; i<5; i++) {
+    let upwards_extension = map(cur_frac,quadMapValue1,quadMapValue2, Keyframes[0], Keyframes[1]) // moves the quads upwards. Has to be applied on each Y value, apologies for the longest ever line of code.
+		for( let across= 0; across < width / SpaceSize2; across++){
+			for( let down = -1.5; down < height / SpaceSize; down++){
+				push();
+				translate(across * quadOnSetX, down * quadOnSetY) // repeats the first set of quads across and down
+				quad(quadX2Size , quadY2Size + upwards_extension,quadX1Size, quadY1Size + upwards_extension,quadX3Size ,quadY3Size + upwards_extension, quadX4Size, quadY4Size + upwards_extension)	
+					pop(); // push and pop so that i can sue translate twice whikst not affecting the other.
+						push()
+						translate(quadOffsetX,quadOffsetY) // another translate to offset more quads so that are slighlty diagnol and line up with the rectangular chekcerboard.
+							push()
+							translate(across * quadOnSetX, down * quadOnSetY); // repeats the second set of quads across and down
+							quad(quadX2Size , quadY2Size + upwards_extension,quadX1Size, quadY1Size + upwards_extension,quadX3Size ,quadY3Size + upwards_extension, quadX4Size, quadY4Size + upwards_extension)	
+								pop();
+									pop();
+	}
+}
+}
 }

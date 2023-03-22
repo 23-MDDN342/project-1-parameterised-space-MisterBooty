@@ -1,5 +1,5 @@
 function draw_one_frame(cur_frac) {
-  let sun_size = height/8;
+  
 
   noStroke();
   // sky
