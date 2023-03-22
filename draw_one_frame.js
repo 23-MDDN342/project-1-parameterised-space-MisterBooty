@@ -6,14 +6,14 @@ function draw_one_frame(cur_frac) {
 
 	let Leftcolor = color("#F6AE2D"); // mustard yellow
 	let Rightcolor = color("#F26419"); // vibrant orange
-	let StrongStroke = width/180 // 190, define so stroke keeps its weight in different canvas sizes
+	let StrongStroke = width/180 //  defined so stroke keeps its weight in different canvas sizes
 	let fromWhite = color (255,255,255);
 	let toBlack = color (0,0,0)
 
-	/////////////////////////////////////////// this needs to be tidied
+	/////////////////////////////////////////// 
 
-	let rectMapValue1 = 2.5
-	let rectMapValue2 = 0.5525
+	let rectMapValue1 = 2.5 // if you take a closer look at the map, these will appear around the wrong way.
+	let rectMapValue2 = 0.5525 // the reeason why these values have to be put backwards is so that the shapes move up, not down.
 
 	let rectSize = width / 12 
 	let rectSize2 = width / 7.5 
@@ -42,7 +42,7 @@ function draw_one_frame(cur_frac) {
 
 	///////////////////////////////////////////
 
-	let Keyframes = [ // used for each shapes loop 
+	let Keyframes = [ // used for both rectangles and the quad loop, to make the shapes move upwards
 		-0.425 * width,
 		0.125 * width,
 		0.625 * width,
@@ -51,12 +51,13 @@ function draw_one_frame(cur_frac) {
 
 ///////////////////////////////////////////////////
 
-let ColourNoiseMap; 
+let ColourNoiseMap;  // Part of this map was taken from a demonstration from Phoebe Zeller in class at Victoria University of Wellington.
+
 if(cur_frac <= 0.5){
-ColourNoiseMap = map(cur_frac, 0, 0.5, 1.1, 0)
+ColourNoiseMap = map(cur_frac, 0, 0.5, 1.1, 0) // 1.1 bound means that the White strobe lingers for a bit longer then the black, as it was my orignal stroke colour.
 }
 else{
-ColourNoiseMap = map(cur_frac, 0.5,1, 0,1.1)
+ColourNoiseMap = map(cur_frac, 0.5,1, 0,1.1) // this map is then put into the lerp below, which is put into the stroke
 }
 
 WhiteLerp = lerpColor(toBlack, fromWhite, ColourNoiseMap)  // stroke and outline that changes from black to white
@@ -88,7 +89,7 @@ for(let i=0; i<5; i++) {
 
 fill(Rightcolor); // vibrant orange quads.
 for(let i=0; i<5; i++) {
-    let upwards_extension = map(cur_frac,quadMapValue1,quadMapValue2, Keyframes[0], Keyframes[1]) // map(cur_frac, 2.5, 0.5, Keyframes[0], Keyframes[1]) // moves the quads upwards. Has to be applied on each Y value
+    let upwards_extension = map(cur_frac,quadMapValue1,quadMapValue2, Keyframes[0], Keyframes[1]) // moves the quads upwards. Has to be applied on each Y value, apologies for the longest ever line of code.
 		for( let across= 0; across < width / SpaceSize2; across++){
 			for( let down = -1.5; down < height / SpaceSize; down++){
 				push();
